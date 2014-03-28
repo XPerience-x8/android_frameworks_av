@@ -573,8 +573,10 @@ public:
     static const char KEY_FULL_VIDEO_SNAP_SUPPORTED[];
 
 #ifdef QCOM_HARDWARE
+#ifndef HAVE_ISO
     static const char KEY_ISO_MODE[];
     static const char KEY_SUPPORTED_ISO_MODES[];
+#endif
     static const char KEY_LENSSHADE[] ;
     static const char KEY_SUPPORTED_LENSSHADE_MODES[] ;
 
@@ -707,6 +709,11 @@ public:
     static const char VIDEO_WDR_ON[];
     static const char OBJECT_TRACKING_ON[];
     static const char OBJECT_TRACKING_OFF[];
+#endif
+
+#ifdef ZTE_CAMERA_HARDWARE
+    static const char KEY_SHUTTER_SOUND_SELECT[];
+    static const char KEY_SHUTTER_SOUND[];
 #endif
 
     static const char KEY_AE_BRACKET_HDR[];
