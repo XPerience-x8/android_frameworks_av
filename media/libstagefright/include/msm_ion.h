@@ -330,4 +330,3 @@ struct ion_flag_data {
 						struct ion_flag_data)
 
 #endif
-
