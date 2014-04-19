@@ -1293,7 +1293,9 @@ unsigned int AudioFlinger::getInputFramesLost(audio_io_handle_t ioHandle) const
 
     RecordThread *recordThread = checkRecordThread_l(ioHandle);
     if (recordThread != NULL) {
+#ifndef ECLAIR_LIBCAMERA
         return recordThread->getInputFramesLost();
+#endif
     }
     return 0;
 }
@@ -1470,7 +1472,11 @@ AudioFlinger::Client::Client(const sp<AudioFlinger>& audioFlinger, pid_t pid)
     :   RefBase(),
         mAudioFlinger(audioFlinger),
         // FIXME should be a "k" constant not hard-coded, in .h or ro. property, see 4 lines below
+#ifdef ECLAIR_LIBCAMERA
+        mMemoryDealer(new MemoryDealer(1024*1024)),
+#else
         mMemoryDealer(new MemoryDealer(1024*1024, "AudioFlinger::Client")),
+#endif
         mPid(pid),
         mTimedTrackCount(0)
 {

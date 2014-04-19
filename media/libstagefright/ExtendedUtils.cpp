@@ -55,7 +55,7 @@ static const int64_t kMaxAVSyncLateMargin     = 250000;
 #include "include/ExtendedExtractor.h"
 #include "include/avc_utils.h"
 #include <fcntl.h>
-#include <linux/msm_ion.h>
+#include "include/msm_ion.h"
 #define MEM_DEVICE "/dev/ion"
 #define MEM_HEAP_ID ION_CP_MM_HEAP_ID
 

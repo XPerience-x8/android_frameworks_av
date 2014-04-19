@@ -1067,6 +1067,9 @@ public:
     void setOrientation(int orientation);
     void setPreviewFpsRange(int minFPS,int maxFPS);
     void getSupportedHfrSizes(Vector<Size> &sizes) const;
+    static const char ORIENTATION_LANDSCAPE[];
+    static const char ORIENTATION_PORTRAIT[];
+    static const char ORIENTATION[];
 #endif
 
 private:
