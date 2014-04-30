@@ -1959,7 +1959,11 @@ status_t OMXCodec::allocateBuffersOnPort(OMX_U32 portIndex) {
             portIndex == kPortIndexInput ? "input" : "output");
 
     size_t totalSize = def.nBufferCountActual * def.nBufferSize;
+#ifdef ECLAIR_LIBCAMERA
+    mDealer[portIndex] = new MemoryDealer(totalSize);
+#else
     mDealer[portIndex] = new MemoryDealer(totalSize, "OMXCodec");
+#endif
 
     for (OMX_U32 i = 0; i < def.nBufferCountActual; ++i) {
         sp<IMemory> mem = mDealer[portIndex]->allocate(def.nBufferSize);
@@ -5315,6 +5319,8 @@ status_t OMXCodec::resumeLocked(bool drainInputBuf) {
         return mState == ERROR ? UNKNOWN_ERROR : OK;
     } else {   // SW Codec
         mPaused = false;
+        if(drainInputBuf)
+            drainInputBuffers();
         return OK;
     }
 }
