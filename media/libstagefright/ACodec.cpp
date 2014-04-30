@@ -506,12 +506,7 @@ status_t ACodec::allocateBuffersOnPort(OMX_U32 portIndex) {
                     portIndex == kPortIndexInput ? "input" : "output");
 
             size_t totalSize = def.nBufferCountActual * def.nBufferSize;
-            
-#ifdef ECLAIR_LIBCAMERA
-            mDealer[portIndex] = new MemoryDealer(totalSize);
-#else
-		mDealer[portIndex] = new MemoryDealer(totalSize, "ACodec");
-#endif
+            mDealer[portIndex] = new MemoryDealer(totalSize, "ACodec");
 
             for (OMX_U32 i = 0; i < def.nBufferCountActual; ++i) {
                 sp<IMemory> mem = mDealer[portIndex]->allocate(def.nBufferSize);
